@@ -1,0 +1,10 @@
+[Unit]
+Description=MCTP demux daemon
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/mctp-demux-daemon astlpc
+SyslogIdentifier=mctp
+
+[Install]
+WantedBy={SYSTEMD_DEFAULT_TARGET}
