@@ -1,0 +1,28 @@
+From cf34c01ebbf248879f39377917eb59c0e9ee768a Mon Sep 17 00:00:00 2001
+From: Andrew Jeffery <andrew@aj.id.au>
+Date: Fri, 10 May 2019 10:46:47 +0930
+Subject: [PATCH 2/5] mctp-lpc: Emit an error on overrun
+
+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+---
+ drivers/misc/mctp-lpc.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/drivers/misc/mctp-lpc.c b/drivers/misc/mctp-lpc.c
+index b22ae38..cfa5f99 100644
+--- a/drivers/misc/mctp-lpc.c
++++ b/drivers/misc/mctp-lpc.c
+@@ -67,6 +67,10 @@ static irqreturn_t mctp_lpc_irq(int irq, void *data)
+ 		return IRQ_NONE;
+ 	}
+ 
++	if (priv->str & STR4_IBF)
++		dev_err(priv->miscdev.parent,
++			"Buffer overrun: dropping idr=0x%x\n", priv->idr);
++
+ 	/* Have to read IDR to ack IRQ */
+ 	regmap_read(priv->map, LPC_IDR4, &idr);
+ 	priv->idr = idr & 0xff;
+-- 
+1.8.3.1
+

@@ -1,0 +1,44 @@
+From b01b7b60e2bb7aa730a46c11d32b454ed09dee62 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Fri, 27 Sep 2019 15:58:49 -0500
+Subject: [PATCH 4/9] ARM: dts: aspeed: ast2600: Add SCU interrupt controllers
+
+Add nodes for the interrupt controllers provided by the SCU.
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ arch/arm/boot/dts/aspeed-g6.dtsi | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-g6.dtsi b/arch/arm/boot/dts/aspeed-g6.dtsi
+index 8ac435b..af8b5a7 100644
+--- a/arch/arm/boot/dts/aspeed-g6.dtsi
++++ b/arch/arm/boot/dts/aspeed-g6.dtsi
+@@ -264,6 +264,24 @@
+ 					compatible = "aspeed,ast2600-smpmem";
+ 					reg = <0x180 0x40>;
+ 				};
++
++				scu_ic0: interrupt-controller@0 {
++					#interrupt-cells = <1>;
++					compatible = "aspeed,ast2600-scu-ic0";
++					reg = <0x560 0x4>;
++					interrupt-parent = <&gic>;
++					interrupts = <GIC_SPI 12 IRQ_TYPE_LEVEL_HIGH>;
++					interrupt-controller;
++				};
++
++				scu_ic1: interrupt-controller@1 {
++					#interrupt-cells = <1>;
++					compatible = "aspeed,ast2600-scu-ic1";
++					reg = <0x570 0x4>;
++					interrupt-parent = <&gic>;
++					interrupts = <GIC_SPI 41 IRQ_TYPE_LEVEL_HIGH>;
++					interrupt-controller;
++				};
+ 			};
+ 
+ 			rng: hwrng@1e6e2524 {
+-- 
+1.8.3.1
+

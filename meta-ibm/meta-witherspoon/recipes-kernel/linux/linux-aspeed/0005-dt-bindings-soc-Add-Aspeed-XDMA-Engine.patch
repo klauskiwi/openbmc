@@ -1,0 +1,46 @@
+From 0e827afe7dedc26d20fef71c2484b54259e00012 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Mon, 1 Jul 2019 14:53:52 -0500
+Subject: [PATCH 5/9] dt-bindings: soc: Add Aspeed XDMA Engine
+
+Document the bindings for the Aspeed AST25XX and AST26XX XDMA engine.
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ .../devicetree/bindings/soc/aspeed/xdma.txt        | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 Documentation/devicetree/bindings/soc/aspeed/xdma.txt
+
+diff --git a/Documentation/devicetree/bindings/soc/aspeed/xdma.txt b/Documentation/devicetree/bindings/soc/aspeed/xdma.txt
+new file mode 100644
+index 0000000..b6053e0
+--- /dev/null
++++ b/Documentation/devicetree/bindings/soc/aspeed/xdma.txt
+@@ -0,0 +1,24 @@
++Aspeed AST25XX and AST26XX XDMA Engine
++
++The XDMA Engine embedded in the AST2500 and AST2600 SOCs can perform automatic
++DMA operations over PCI between the SOC (acting as a BMC) and a host processor.
++
++Required properties:
++ - compatible		: must be "aspeed,ast2500-xdma" or
++			  "aspeed,ast2600-xdma"
++ - reg			: contains the address and size of the memory region
++			  associated with the XDMA engine registers
++ - resets		: reset specifier for the syscon reset associated with
++			  the XDMA engine
++ - interrupts-extended	: two interrupt nodes; the first specifies the global
++			  interrupt for the XDMA engine and the second
++			  specifies the PCI-E reset or PERST interrupt.
++
++Example:
++
++    xdma@1e6e7000 {
++        compatible = "aspeed,ast2500-xdma";
++        reg = <0x1e6e7000 0x100>;
++        resets = <&syscon ASPEED_RESET_XDMA>;
++        interrupts-extended = <&vic 6>, <&scu_ic ASPEED_AST2500_SCU_IC_PCIE_RESET_LO_TO_HI>;
++    };
+-- 
+1.8.3.1
+

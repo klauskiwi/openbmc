@@ -1,0 +1,27 @@
+From 353eff8ca6aa933c6e8a01aa64327f6112abfa56 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Tue, 15 Oct 2019 14:39:04 -0500
+Subject: [PATCH 1/2] ARM: dts: aspeed: rainier: Enable XDMA engine
+
+Enable the XDMA engine node.
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+index cdc65eb28d20..1436ac5e3449 100644
+--- a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
++++ b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+@@ -471,3 +471,7 @@
+ 		spi-max-frequency = <100000000>;
+ 	};
+ };
++
++&xdma {
++	status = "okay";
++};
+-- 
+2.23.0
+

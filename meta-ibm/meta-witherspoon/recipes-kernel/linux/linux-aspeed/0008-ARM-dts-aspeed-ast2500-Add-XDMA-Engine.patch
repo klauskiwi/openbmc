@@ -1,0 +1,41 @@
+From 66350e63ebdc49c8039dc4da6a6069cdf5a10da0 Mon Sep 17 00:00:00 2001
+From: Eddie James <eajames@linux.ibm.com>
+Date: Mon, 23 Sep 2019 13:34:25 -0500
+Subject: [PATCH 8/9] ARM: dts: aspeed: ast2500: Add XDMA Engine
+
+Add a node for the XDMA engine with all the necessary information.
+
+Signed-off-by: Eddie James <eajames@linux.ibm.com>
+---
+ arch/arm/boot/dts/aspeed-g5.dtsi | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-g5.dtsi b/arch/arm/boot/dts/aspeed-g5.dtsi
+index 909e6e3..17d7d49 100644
+--- a/arch/arm/boot/dts/aspeed-g5.dtsi
++++ b/arch/arm/boot/dts/aspeed-g5.dtsi
+@@ -1,5 +1,6 @@
+ // SPDX-License-Identifier: GPL-2.0+
+ #include <dt-bindings/clock/aspeed-clock.h>
++#include <dt-bindings/interrupt-controller/aspeed-scu-ic.h>
+ 
+ / {
+ 	model = "Aspeed BMC";
+@@ -264,6 +265,14 @@
+ 				interrupts = <0x19>;
+ 			};
+ 
++			xdma: xdma@1e6e7000 {
++				compatible = "aspeed,ast2500-xdma";
++				reg = <0x1e6e7000 0x100>;
++				resets = <&syscon ASPEED_RESET_XDMA>;
++				interrupts-extended = <&vic 6>, <&scu_ic ASPEED_AST2500_SCU_IC_PCIE_RESET_LO_TO_HI>;
++				status = "disabled";
++			};
++
+ 			adc: adc@1e6e9000 {
+ 				compatible = "aspeed,ast2500-adc";
+ 				reg = <0x1e6e9000 0xb0>;
+-- 
+1.8.3.1
+
