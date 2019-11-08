@@ -1,0 +1,24 @@
+diff --git a/Makefile.istep0 b/Makefile.istep0
+new file mode 100644
+index 0000000..47fc3a5
+--- /dev/null
++++ b/Makefile.istep0
+@@ -0,0 +1,5 @@
++# istep0
++include ekb/chips/p9/procedures/hwp/perv/p9_nv_ref_clk_enable.mk
++include ekb/chips/p9/procedures/hwp/perv/p9_setup_sbe_config.mk
++include ekb/chips/p9/procedures/hwp/perv/p9_start_cbs.mk
++include ekb/chips/p9/procedures/hwp/ffdc/p9_pib2pcb_mux_seq.mk
+diff --git a/Makefile.generate b/Makefile.generate
+index 6d0e18c..c524e86 100644
+--- a/Makefile.generate
++++ b/Makefile.generate
+@@ -107,7 +107,7 @@ endef
+ 
+ all: definitions
+ 
+-include Makefile.istep
++include Makefile.istep0
+ 
+ SLIST += $(SRC_EXTRA)
+ 
