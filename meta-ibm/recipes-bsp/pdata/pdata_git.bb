@@ -15,3 +15,5 @@ SRC_URI = "git://git@github.ibm.com/phal/pdata;protocol=ssh"
 SRCREV = "d68b33f5540ee02963c897ef47aebce73fcfcb14"
 
 DEPENDS = "pdbg"
+
+BBCLASSEXTEND = "native"
