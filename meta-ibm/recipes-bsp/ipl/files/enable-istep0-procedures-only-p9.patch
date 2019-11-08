@@ -1,0 +1,131 @@
+diff --git a/Makefile.am b/Makefile.am
+index 0ae24d2..b72dc6f 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -15,28 +15,7 @@ ipl_LDADD = libipl.la
+ 
+ if BUILD_P9
+ libipl_istep_SOURCES = \
+-	libipl/p9/ipl0.C \
+-	libipl/p9/ipl1.C \
+-	libipl/p9/ipl2.C \
+-	libipl/p9/ipl3.C \
+-	libipl/p9/ipl4.C \
+-	libipl/p9/ipl5.C \
+-	libipl/p9/ipl6.C \
+-	libipl/p9/ipl7.C \
+-	libipl/p9/ipl8.C \
+-	libipl/p9/ipl9.C \
+-	libipl/p9/ipl10.C \
+-	libipl/p9/ipl11.C \
+-	libipl/p9/ipl12.C \
+-	libipl/p9/ipl13.C \
+-	libipl/p9/ipl14.C \
+-	libipl/p9/ipl15.C \
+-	libipl/p9/ipl16.C \
+-	libipl/p9/ipl17.C \
+-	libipl/p9/ipl18.C \
+-	libipl/p9/ipl19.C \
+-	libipl/p9/ipl20.C \
+-	libipl/p9/ipl21.C
++	libipl/p9/ipl0.C
+ 
+ libipl_istep_CXXFLAGS = \
+ 	-I$(INCDIR)/ekb/chips/p9/procedures/hwp/nest
+diff --git a/libipl/p9/ipl0.C b/libipl/p9/ipl0.C
+index 62ff2ee..13eda2e 100644
+--- a/libipl/p9/ipl0.C
++++ b/libipl/p9/ipl0.C
+@@ -7,15 +7,15 @@ extern "C" {
+ #include "libipl_internal.h"
+ }
+ 
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_pre_poweron.H>
+-#include <ekb/chips/centaur/procedures/hwp/perv/cen_pre_poweron.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_select_clock_mux.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_clock_test.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_set_fsi_gp_shadow.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_select_boot_master.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_setup_sbe_config.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_pre_poweron.H>
++//#include <ekb/chips/centaur/procedures/hwp/perv/cen_pre_poweron.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_select_clock_mux.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_clock_test.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_set_fsi_gp_shadow.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_select_boot_master.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_setup_sbe_config.H>
+ #include <ekb/chips/p9/procedures/hwp/perv/p9_start_cbs.H>
+-#include <ekb/chips/p9/procedures/hwp/perv/p9_nv_ref_clk_enable.H>
++//#include <ekb/chips/p9/procedures/hwp/perv/p9_nv_ref_clk_enable.H>
+ 
+ static void ipl_pre0(void)
+ {
+@@ -37,14 +37,14 @@ static int ipl_poweron(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_pre_poweron(pib);
++		//p9_pre_poweron(pib);
+ 	}
+ 
+ 	pdbg_for_each_class_target("memb", memb) {
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		cen_pre_poweron(memb);
++		//cen_pre_poweron(memb);
+ 	}
+ 
+ 	return 0;
+@@ -68,13 +68,13 @@ static int ipl_proc_clock_test(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_select_clock_mux(pib);
++		//p9_select_clock_mux(pib);
+ 	}
+ 
+ 	pdbg_for_each_class_target("pib", pib) {
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+-		p9_clock_test(pib, BOTH_SRC0);
++		//p9_clock_test(pib, BOTH_SRC0);
+ 	}
+ 
+ 	return 0;
+@@ -88,7 +88,7 @@ static int ipl_proc_prep_ipl(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_set_fsi_gp_shadow(pib);
++		//p9_set_fsi_gp_shadow(pib);
+ 	}
+ 
+ 	return 0;
+@@ -102,7 +102,7 @@ static int ipl_proc_select_boot_master(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_select_boot_master(pib);
++		//p9_select_boot_master(pib);
+ 	}
+ 
+ 	return 0;
+@@ -116,7 +116,7 @@ static int ipl_sbe_config_update(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_setup_sbe_config(pib);
++		//p9_setup_sbe_config(pib);
+ 	}
+ 
+ 	return 0;
+@@ -137,7 +137,7 @@ static int ipl_sbe_start(void)
+ 		if (ipl_mode() == IPL_DEFAULT && pdbg_target_index(pib) != 0)
+ 			continue;
+ 
+-		p9_nv_ref_clk_enable(pib);
++		//p9_nv_ref_clk_enable(pib);
+ 	}
+ 
+ 	return 0;
