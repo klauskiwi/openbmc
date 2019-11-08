@@ -1,0 +1,13 @@
+diff --git a/ekb/hwpf/fapi2/include/return_code.H b/ekb/hwpf/fapi2/include/return_code.H
+index 5977ed97a..da6705436 100644
+--- a/ekb/hwpf/fapi2/include/return_code.H
++++ b/ekb/hwpf/fapi2/include/return_code.H
+@@ -41,7 +41,7 @@ namespace fapi2
+ #if defined (FAPI2_NO_FFDC) || defined (MINIMUM_FFDC)
+ class ReturnCode
+ #else
+-class ReturnCode : public FirstFailureData<ReturnCode>
++class ReturnCode //: public FirstFailureData<ReturnCode>
+ #endif
+ {
+     public:
