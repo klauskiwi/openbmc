@@ -17,6 +17,7 @@ pldm_kernel_patches = " \
     file://0003-mctp-lpc-Leave-value-in-IDR-and-disable-IRQ-on-IRQ.patch \
     file://0004-mctp-lpc-Only-trigger-IRQ-on-ODR-write.patch \
     file://0002-ARM-dts-aspeed-rainier-Enable-KCS-device.patch \
+    file://0001-ARM-dts-aspeed-rainier-Add-gpio-keys-polled-for-fans.patch \
 "
 SRC_URI_append_ibm-ac-server = " file://witherspoon.cfg ${pldm_kernel_patches}"
 SRC_URI_append_rainier = " file://rainier.cfg ${pldm_kernel_patches}"

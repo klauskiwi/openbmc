@@ -1,0 +1,112 @@
+From 85d9467a269e7690bfd5399fac1f78a6b7d0c01e Mon Sep 17 00:00:00 2001
+From: Brandon Wyman <bjwyman@gmail.com>
+Date: Fri, 8 Nov 2019 17:34:05 -0600
+Subject: [PATCH linux dev-5.3] ARM: dts: aspeed: rainier: Add gpio-keys-polled
+ for fans
+
+Add a gpio-keys-polled section to the Rainier device tree for the fan
+presence signals on the PCA9552 I2C device on bus 7.
+
+Signed-off-by: Brandon Wyman <bjwyman@gmail.com>
+---
+ arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts | 50 ++++++++++++++++++++
+ 1 file changed, 50 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+index b1c50a6101a0..a9f09086ae37 100644
+--- a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
++++ b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+@@ -4,6 +4,7 @@
+ 
+ #include "aspeed-g6.dtsi"
+ #include <dt-bindings/gpio/aspeed-gpio.h>
++#include <dt-bindings/leds/leds-pca955x.h>
+ 
+ / {
+ 	model = "Rainier";
+@@ -62,6 +63,49 @@
+ 		};
+ 	};
+ 
++	gpio-keys-polled {
++		compatible = "gpio-keys-polled";
++		#address-cells = <1>;
++		#size-cells = <0>;
++		poll-interval = <1000>;
++
++		fan0-presence {
++			label = "fan0-presence";
++			gpios = <&pca0 6 GPIO_ACTIVE_LOW>;
++			linux,code = <6>;
++		};
++
++		fan1-presence {
++			label = "fan1-presence";
++			gpios = <&pca0 7 GPIO_ACTIVE_LOW>;
++			linux,code = <7>;
++		};
++
++		fan2-presence {
++			label = "fan2-presence";
++			gpios = <&pca0 8 GPIO_ACTIVE_LOW>;
++			linux,code = <8>;
++		};
++
++		fan3-presence {
++			label = "fan3-presence";
++			gpios = <&pca0 9 GPIO_ACTIVE_LOW>;
++			linux,code = <9>;
++		};
++
++		fan4-presence {
++			label = "fan4-presence";
++			gpios = <&pca0 10 GPIO_ACTIVE_LOW>;
++			linux,code = <10>;
++		};
++
++		fan5-presence {
++			label = "fan5-presence";
++			gpios = <&pca0 11 GPIO_ACTIVE_LOW>;
++			linux,code = <11>;
++		};
++	};
++
+ };
+ 
+ &emmc_controller {
+@@ -297,26 +341,32 @@
+ 
+ 		gpio@6 {
+ 			reg = <6>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@7 {
+ 			reg = <7>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@8 {
+ 			reg = <8>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@9 {
+ 			reg = <9>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@10 {
+ 			reg = <10>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@11 {
+ 			reg = <11>;
++			type = <PCA955X_TYPE_GPIO>;
+ 		};
+ 
+ 		gpio@12 {
+-- 
+2.24.0
+
