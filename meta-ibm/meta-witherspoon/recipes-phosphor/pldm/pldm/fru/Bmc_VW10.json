@@ -2,12 +2,20 @@
    "record_details":
    {
         "fru_record_type" : 254,
+<<<<<<< HEAD
         "fru_encoding_type": 1,
         "dbus_interface_name": "xyz.openbmc_project.Inventory.Item.Bmc"
    },
    "fru_fields":[
      {
          "fru_field_type" : 2,
+=======
+        "encoding_type": 1
+   },
+   "fields":[
+     {
+         "field_type" : 2,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",
@@ -16,7 +24,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 3,
+=======
+         "field_type" : 3,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",
@@ -25,7 +37,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 4,
+=======
+         "field_type" : 4,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",

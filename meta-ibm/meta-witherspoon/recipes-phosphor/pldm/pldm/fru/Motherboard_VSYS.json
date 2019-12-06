@@ -2,12 +2,20 @@
    "record_details":
    {
         "fru_record_type" : 254,
+<<<<<<< HEAD
         "fru_encoding_type": 1,
         "dbus_interface_name": "xyz.openbmc_project.Inventory.Item.Board.Motherboard"
    },
    "fru_fields":[
      {
          "fru_field_type" : 2,
+=======
+        "encoding_type": 1
+   },
+   "fields":[
+     {
+         "field_type" : 2,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -16,7 +24,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 3,
+=======
+         "field_type" : 3,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -25,7 +37,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 4,
+=======
+         "field_type" : 4,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -34,7 +50,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 5,
+=======
+         "field_type" : 5,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -43,7 +63,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 6,
+=======
+         "field_type" : 6,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -52,7 +76,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 7,
+=======
+         "field_type" : 7,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -61,7 +89,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 8,
+=======
+         "field_type" : 8,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -70,7 +102,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 9,
+=======
+         "field_type" : 9,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -79,7 +115,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 10,
+=======
+         "field_type" : 10,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -88,7 +128,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 11,
+=======
+         "field_type" : 11,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -97,7 +141,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 12,
+=======
+         "field_type" : 12,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -106,7 +154,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 13,
+=======
+         "field_type" : 13,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -115,7 +167,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 14,
+=======
+         "field_type" : 14,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -124,7 +180,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 15,
+=======
+         "field_type" : 15,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
@@ -133,7 +193,11 @@
             }
       },
       {
+<<<<<<< HEAD
          "fru_field_type" : 16,
+=======
+         "field_type" : 16,
+>>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VSYS",
