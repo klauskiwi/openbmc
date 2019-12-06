@@ -1,0 +1,37 @@
+{
+   "record_details":
+   {
+        "fru_record_type" : 254,
+        "encoding_type": 1
+   },
+   "fields":[
+     {
+         "field_type" : 2,
+         "dbus":
+            {
+               "interface" : "com.ibm.ipzvpd.VW10",
+               "property_name" : "RT",
+               "property_type" : "bytearray"
+            }
+      },
+      {
+         "field_type" : 3,
+         "dbus":
+            {
+               "interface" : "com.ibm.ipzvpd.VW10",
+               "property_name" : "DR",
+               "property_type" : "bytearray"
+            }
+      },
+      {
+         "field_type" : 4,
+         "dbus":
+            {
+               "interface" : "com.ibm.ipzvpd.VW10",
+               "property_name" : "GD",
+               "property_type" : "bytearray"
+            }
+      }
+    ]
+}
+
