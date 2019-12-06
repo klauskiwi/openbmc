@@ -1,17 +1,18 @@
-From 3898a8463e2da9a9e8c39135eac09abe13fb99ab Mon Sep 17 00:00:00 2001
+From b6f07cb99fe2f6108ed367d87ea92f01503f62fb Mon Sep 17 00:00:00 2001
 From: Eddie James <eajames@linux.ibm.com>
-Date: Tue, 15 Oct 2019 15:57:11 -0500
-Subject: [PATCH] ARM: dts: aspeed: ast2600: Add Aspeed XDMA Engine
+Date: Fri, 8 Nov 2019 14:18:30 -0600
+Subject: [PATCH 09/12] ARM: dts: aspeed: ast2600: Add XDMA Engine
 
-Add a node for the XDMA engine with all the necessary information.
+Add a node for the XDMA engine with all the necessary information. Also
+add a simple syscon node for the SDRAM memory controller.
 
 Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- arch/arm/boot/dts/aspeed-g6.dtsi | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/arm/boot/dts/aspeed-g6.dtsi | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
 
 diff --git a/arch/arm/boot/dts/aspeed-g6.dtsi b/arch/arm/boot/dts/aspeed-g6.dtsi
-index 8ac435b3dbde..6d0c112c593e 100644
+index e4cde82..9d3d8b8 100644
 --- a/arch/arm/boot/dts/aspeed-g6.dtsi
 +++ b/arch/arm/boot/dts/aspeed-g6.dtsi
 @@ -3,6 +3,7 @@
@@ -22,16 +23,32 @@ index 8ac435b3dbde..6d0c112c593e 100644
  
  / {
  	model = "Aspeed BMC";
-@@ -273,6 +274,15 @@
+@@ -245,6 +246,11 @@
+ 			status = "disabled";
+ 		};
+ 
++		sdmc: sdram@1e6e0000 {
++			compatible = "syscon";
++			reg = <0x1e6e0000 0xb8>;
++		};
++
+ 		apb {
+ 			compatible = "simple-bus";
+ 			#address-cells = <1>;
+@@ -291,6 +297,19 @@
  				quality = <100>;
  			};
  
 +			xdma: xdma@1e6e7000 {
 +				compatible = "aspeed,ast2600-xdma";
 +				reg = <0x1e6e7000 0x100>;
++				clocks = <&syscon ASPEED_CLK_GATE_BCLK>;
 +				resets = <&syscon ASPEED_RESET_DEV_XDMA>;
 +				interrupts-extended = <&gic GIC_SPI 6 IRQ_TYPE_LEVEL_HIGH>,
 +						      <&scu_ic0 ASPEED_AST2600_SCU_IC0_PCIE_PERST_LO_TO_HI>;
++				pcie-device = "bmc";
++				scu = <&syscon>;
++				sdmc = <&sdmc>;
 +				status = "disabled";
 +			};
 +
@@ -39,5 +56,5 @@ index 8ac435b3dbde..6d0c112c593e 100644
  				#gpio-cells = <2>;
  				gpio-controller;
 -- 
-2.23.0
+1.8.3.1
 

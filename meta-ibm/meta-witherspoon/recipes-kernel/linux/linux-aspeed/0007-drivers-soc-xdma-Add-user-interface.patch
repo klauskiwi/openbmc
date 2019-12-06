@@ -1,7 +1,7 @@
-From f7e7e203491d55ad52de86b2d3c30ad088387839 Mon Sep 17 00:00:00 2001
+From a8fc5044d09fc98735d298c7c22212fdf0e51cf1 Mon Sep 17 00:00:00 2001
 From: Eddie James <eajames@linux.ibm.com>
-Date: Mon, 1 Jul 2019 14:53:54 -0500
-Subject: [PATCH 7/9] drivers/soc: xdma: Add user interface
+Date: Fri, 8 Nov 2019 14:18:28 -0600
+Subject: [PATCH 07/12] drivers/soc: xdma: Add user interface
 
 This commits adds a miscdevice to provide a user interface to the XDMA
 engine. The interface provides the write operation to start DMA
@@ -24,32 +24,31 @@ complete for non-blocking IO.
 
 Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- drivers/soc/aspeed/aspeed-xdma.c | 221 +++++++++++++++++++++++++++++++++++++++
- 1 file changed, 221 insertions(+)
+ drivers/soc/aspeed/aspeed-xdma.c | 224 +++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 224 insertions(+)
 
 diff --git a/drivers/soc/aspeed/aspeed-xdma.c b/drivers/soc/aspeed/aspeed-xdma.c
-index 775814f..f2f30bb 100644
+index a9b3eeb..d4b96a7 100644
 --- a/drivers/soc/aspeed/aspeed-xdma.c
 +++ b/drivers/soc/aspeed/aspeed-xdma.c
-@@ -64,6 +64,9 @@
- #define XDMA_CMDQ_SIZE				PAGE_SIZE
- #define XDMA_NUM_CMDS				\
- 	(XDMA_CMDQ_SIZE / sizeof(struct aspeed_xdma_cmd))
-+#define XDMA_OP_SIZE_MAX			sizeof(struct aspeed_xdma_op)
-+#define XDMA_OP_SIZE_MIN			\
-+	(sizeof(struct aspeed_xdma_op) - sizeof(u64))
+@@ -13,6 +13,7 @@
+ #include <linux/io.h>
+ #include <linux/jiffies.h>
+ #include <linux/mfd/syscon.h>
++#include <linux/miscdevice.h>
+ #include <linux/module.h>
+ #include <linux/mutex.h>
+ #include <linux/of_device.h>
+@@ -206,6 +207,8 @@ struct aspeed_xdma {
+ 	struct clk *clock;
+ 	struct reset_control *reset;
  
- /* Aspeed specification requires 10ms after switching the reset line */
- #define XDMA_RESET_TIME_MS			10
-@@ -214,6 +217,7 @@ struct aspeed_xdma {
- 	bool in_reset;
- 	bool upstream;
- 	unsigned int cmd_idx;
++	/* file_lock serializes reads of current_client */
 +	struct mutex file_lock;
- 	struct mutex start_lock;
- 	struct delayed_work reset_work;
- 	spinlock_t client_lock;
-@@ -228,6 +232,8 @@ struct aspeed_xdma {
+ 	struct aspeed_xdma_client *current_client;
+ 
+ 	/* start_lock protects cmd_idx, cmdq, and the state of the engine */
+@@ -227,6 +230,8 @@ struct aspeed_xdma {
  	dma_addr_t cmdq_vga_phys;
  	void *cmdq_vga_virt;
  	struct gen_pool *vga_pool;
@@ -58,7 +57,7 @@ index 775814f..f2f30bb 100644
  };
  
  struct aspeed_xdma_client {
-@@ -555,6 +561,204 @@ static irqreturn_t aspeed_xdma_pcie_irq(int irq, void *arg)
+@@ -517,6 +522,207 @@ static irqreturn_t aspeed_xdma_pcie_irq(int irq, void *arg)
  	return IRQ_HANDLED;
  }
  
@@ -72,24 +71,28 @@ index 775814f..f2f30bb 100644
 +	u32 offs = client->phys ? (client->phys - ctx->vga_phys) :
 +		XDMA_CMDQ_SIZE;
 +
-+	if (len < XDMA_OP_SIZE_MIN)
++	if (len != sizeof(op))
 +		return -EINVAL;
-+
-+	if (len > XDMA_OP_SIZE_MAX)
-+		len = XDMA_OP_SIZE_MAX;
 +
 +	rc = copy_from_user(&op, buf, len);
 +	if (rc)
 +		return rc;
 +
 +	if (op.direction == ASPEED_XDMA_DIRECTION_RESET) {
++		unsigned long flags;
++
++		spin_lock_irqsave(&ctx->reset_lock, flags);
++		if (ctx->in_reset) {
++			spin_unlock_irqrestore(&ctx->reset_lock, flags);
++			return len;
++		}
++
++		ctx->in_reset = true;
++		spin_unlock_irqrestore(&ctx->reset_lock, flags);
++
 +		mutex_lock(&ctx->start_lock);
 +
-+		if (aspeed_xdma_reset_start(ctx)) {
-+			msleep(XDMA_RESET_TIME_MS);
-+
-+			aspeed_xdma_reset_finish(ctx);
-+		}
++		aspeed_xdma_reset(ctx);
 +
 +		mutex_unlock(&ctx->start_lock);
 +
@@ -105,15 +108,14 @@ index 775814f..f2f30bb 100644
 +		if (!mutex_trylock(&ctx->file_lock))
 +			return -EAGAIN;
 +
-+		if (ctx->in_progress || ctx->in_reset) {
++		if (ctx->current_client) {
 +			mutex_unlock(&ctx->file_lock);
 +			return -EAGAIN;
 +		}
 +	} else {
 +		mutex_lock(&ctx->file_lock);
 +
-+		rc = wait_event_interruptible(ctx->wait, !ctx->in_progress &&
-+					      !ctx->in_reset);
++		rc = wait_event_interruptible(ctx->wait, !ctx->current_client);
 +		if (rc) {
 +			mutex_unlock(&ctx->file_lock);
 +			return -EINTR;
@@ -125,7 +127,7 @@ index 775814f..f2f30bb 100644
 +	mutex_unlock(&ctx->file_lock);
 +
 +	if (!(file->f_flags & O_NONBLOCK)) {
-+		rc = wait_event_interruptible(ctx->wait, !ctx->in_progress);
++		rc = wait_event_interruptible(ctx->wait, !client->in_progress);
 +		if (rc)
 +			return -EINTR;
 +
@@ -157,10 +159,10 @@ index 775814f..f2f30bb 100644
 +	}
 +
 +	if (req & (EPOLLOUT | EPOLLWRNORM)) {
-+		if (ctx->in_progress)
++		if (ctx->current_client)
 +			poll_wait(file, &ctx->wait, wait);
 +
-+		if (!ctx->in_progress)
++		if (!ctx->current_client)
 +			mask |= EPOLLOUT | EPOLLWRNORM;
 +	}
 +
@@ -260,18 +262,18 @@ index 775814f..f2f30bb 100644
 +	.release		= aspeed_xdma_release,
 +};
 +
- static int aspeed_xdma_init(struct aspeed_xdma *ctx)
+ static int aspeed_xdma_probe(struct platform_device *pdev)
  {
- 	int rc;
-@@ -737,6 +941,7 @@ static int aspeed_xdma_probe(struct platform_device *pdev)
- 
+ 	int irq;
+@@ -539,6 +745,7 @@ static int aspeed_xdma_probe(struct platform_device *pdev)
+ 	ctx->chip = md;
  	ctx->dev = dev;
  	platform_set_drvdata(pdev, ctx);
 +	mutex_init(&ctx->file_lock);
  	mutex_init(&ctx->start_lock);
- 	INIT_DELAYED_WORK(&ctx->reset_work, aspeed_xdma_reset_work);
- 	spin_lock_init(&ctx->client_lock);
-@@ -786,6 +991,21 @@ static int aspeed_xdma_probe(struct platform_device *pdev)
+ 	INIT_WORK(&ctx->reset_work, aspeed_xdma_reset_work);
+ 	spin_lock_init(&ctx->reset_lock);
+@@ -678,6 +885,22 @@ static int aspeed_xdma_probe(struct platform_device *pdev)
  
  	aspeed_xdma_init_eng(ctx);
  
@@ -281,26 +283,27 @@ index 775814f..f2f30bb 100644
 +	ctx->misc.parent = dev;
 +	rc = misc_register(&ctx->misc);
 +	if (rc) {
-+		dev_err(dev, "Unable to register xdma miscdevice.\n");
++		dev_err(dev, "Failed to register xdma miscdevice.\n");
 +
 +		gen_pool_free(ctx->vga_pool, (unsigned long)ctx->cmdq_vga_virt,
 +			      XDMA_CMDQ_SIZE);
-+		iounmap(ctx->vga_virt);
++
 +		reset_control_assert(ctx->reset);
++		clk_disable_unprepare(ctx->clock);
 +		return rc;
 +	}
 +
  	/*
  	 * This interrupt could fire immediately so only request it once the
  	 * engine and driver are initialized.
-@@ -807,6 +1027,7 @@ static int aspeed_xdma_remove(struct platform_device *pdev)
+@@ -699,6 +922,7 @@ static int aspeed_xdma_remove(struct platform_device *pdev)
  {
  	struct aspeed_xdma *ctx = platform_get_drvdata(pdev);
  
 +	misc_deregister(&ctx->misc);
  	gen_pool_free(ctx->vga_pool, (unsigned long)ctx->cmdq_vga_virt,
  		      XDMA_CMDQ_SIZE);
- 	iounmap(ctx->vga_virt);
+ 
 -- 
 1.8.3.1
 

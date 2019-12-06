@@ -1,7 +1,7 @@
-From 938ff5f2e91a7b48fef8f8606a8717369c07d74d Mon Sep 17 00:00:00 2001
+From b01134560d99c8ef2c13074dd642230ba02e1fe8 Mon Sep 17 00:00:00 2001
 From: Eddie James <eajames@linux.ibm.com>
-Date: Fri, 27 Sep 2019 15:58:46 -0500
-Subject: [PATCH 1/9] dt-bindings: interrupt-controller: Add Aspeed SCU
+Date: Fri, 8 Nov 2019 14:18:22 -0600
+Subject: [PATCH 01/12] dt-bindings: interrupt-controller: Add Aspeed SCU
  interrupt controller
 
 Document the Aspeed SCU interrupt controller and add an include file
@@ -9,19 +9,19 @@ for the interrupts it provides.
 
 Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- .../interrupt-controller/aspeed,ast2xxx-scu-ic.txt | 26 ++++++++++++++++++++++
- MAINTAINERS                                        |  7 ++++++
- .../interrupt-controller/aspeed-scu-ic.h           | 23 +++++++++++++++++++
- 3 files changed, 56 insertions(+)
+ .../interrupt-controller/aspeed,ast2xxx-scu-ic.txt | 23 ++++++++++++++++++++++
+ MAINTAINERS                                        |  7 +++++++
+ .../interrupt-controller/aspeed-scu-ic.h           | 23 ++++++++++++++++++++++
+ 3 files changed, 53 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/interrupt-controller/aspeed,ast2xxx-scu-ic.txt
  create mode 100644 include/dt-bindings/interrupt-controller/aspeed-scu-ic.h
 
 diff --git a/Documentation/devicetree/bindings/interrupt-controller/aspeed,ast2xxx-scu-ic.txt b/Documentation/devicetree/bindings/interrupt-controller/aspeed,ast2xxx-scu-ic.txt
 new file mode 100644
-index 0000000..baa3780
+index 0000000..251ed44
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/interrupt-controller/aspeed,ast2xxx-scu-ic.txt
-@@ -0,0 +1,26 @@
+@@ -0,0 +1,23 @@
 +Aspeed AST25XX and AST26XX SCU Interrupt Controller
 +
 +Required Properties:
@@ -29,10 +29,8 @@ index 0000000..baa3780
 + - compatible			: must be "aspeed,ast2500-scu-ic",
 +				  "aspeed,ast2600-scu-ic0" or
 +				  "aspeed,ast2600-scu-ic1"
-+ - reg				: address and size of the SCU register
-+				  associated with the controller
 + - interrupts			: interrupt from the parent controller
-+ - interrupt-controller		: indicates that the controlle receives and
++ - interrupt-controller		: indicates that the controller receives and
 +				  fires new interrupts for child busses
 +
 +Example:
@@ -43,13 +41,12 @@ index 0000000..baa3780
 +        scu_ic: interrupt-controller@18 {
 +            #interrupt-cells = <1>;
 +            compatible = "aspeed,ast2500-scu-ic";
-+            reg = <0x18 0x04>;
 +            interrupts = <21>;
 +            interrupt-controller;
 +        };
 +    };
 diff --git a/MAINTAINERS b/MAINTAINERS
-index f5c5eaa..ce26424 100644
+index a8aec3e..3711ae6 100644
 --- a/MAINTAINERS
 +++ b/MAINTAINERS
 @@ -2647,6 +2647,13 @@ S:	Maintained

@@ -1,17 +1,17 @@
-From 7694f5b79b2f75637bde81eb4aeb5cd610b41981 Mon Sep 17 00:00:00 2001
+From 5956dd7f57edd208de67025b82bc009901cebe68 Mon Sep 17 00:00:00 2001
 From: Eddie James <eajames@linux.ibm.com>
-Date: Fri, 27 Sep 2019 15:58:48 -0500
-Subject: [PATCH 3/9] ARM: dts: aspeed: ast2500: Add SCU interrupt controller
+Date: Fri, 8 Nov 2019 14:18:24 -0600
+Subject: [PATCH 03/12] ARM: dts: aspeed: ast2500: Add SCU interrupt controller
 
 Add a node for the interrupt controller provided by the SCU.
 
 Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- arch/arm/boot/dts/aspeed-g5.dtsi | 11 ++++++++++-
- 1 file changed, 10 insertions(+), 1 deletion(-)
+ arch/arm/boot/dts/aspeed-g5.dtsi | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/aspeed-g5.dtsi b/arch/arm/boot/dts/aspeed-g5.dtsi
-index 00f05bd..909e6e3 100644
+index 8c84342..223a921 100644
 --- a/arch/arm/boot/dts/aspeed-g5.dtsi
 +++ b/arch/arm/boot/dts/aspeed-g5.dtsi
 @@ -217,8 +217,9 @@
@@ -25,7 +25,7 @@ index 00f05bd..909e6e3 100644
  				#clock-cells = <1>;
  				#reset-cells = <1>;
  
-@@ -236,6 +237,14 @@
+@@ -236,6 +237,13 @@
  				vga_scratch: scratch {
  					compatible = "aspeed,bmc-misc";
  				};
@@ -33,7 +33,6 @@ index 00f05bd..909e6e3 100644
 +				scu_ic: interrupt-controller@18 {
 +					#interrupt-cells = <1>;
 +					compatible = "aspeed,ast2500-scu-ic";
-+					reg = <0x18 0x04>;
 +					interrupts = <21>;
 +					interrupt-controller;
 +				};

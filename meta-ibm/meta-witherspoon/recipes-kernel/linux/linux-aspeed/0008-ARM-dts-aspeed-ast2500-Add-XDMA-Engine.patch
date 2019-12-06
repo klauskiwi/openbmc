@@ -1,17 +1,18 @@
-From 66350e63ebdc49c8039dc4da6a6069cdf5a10da0 Mon Sep 17 00:00:00 2001
+From 9b094c1c0bf29cbf5efa9a6105d1e7fd53571b31 Mon Sep 17 00:00:00 2001
 From: Eddie James <eajames@linux.ibm.com>
-Date: Mon, 23 Sep 2019 13:34:25 -0500
-Subject: [PATCH 8/9] ARM: dts: aspeed: ast2500: Add XDMA Engine
+Date: Fri, 8 Nov 2019 14:18:29 -0600
+Subject: [PATCH 08/12] ARM: dts: aspeed: ast2500: Add XDMA Engine
 
-Add a node for the XDMA engine with all the necessary information.
+Add a node for the XDMA engine with all the necessary information. Also
+make the EDAC node compatible with syscon.
 
 Signed-off-by: Eddie James <eajames@linux.ibm.com>
 ---
- arch/arm/boot/dts/aspeed-g5.dtsi | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ arch/arm/boot/dts/aspeed-g5.dtsi | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/arch/arm/boot/dts/aspeed-g5.dtsi b/arch/arm/boot/dts/aspeed-g5.dtsi
-index 909e6e3..17d7d49 100644
+index 223a921..3125bde 100644
 --- a/arch/arm/boot/dts/aspeed-g5.dtsi
 +++ b/arch/arm/boot/dts/aspeed-g5.dtsi
 @@ -1,5 +1,6 @@
@@ -21,15 +22,28 @@ index 909e6e3..17d7d49 100644
  
  / {
  	model = "Aspeed BMC";
-@@ -264,6 +265,14 @@
+@@ -49,7 +50,7 @@
+ 	};
+ 
+ 	edac: sdram@1e6e0000 {
+-		compatible = "aspeed,ast2500-sdram-edac";
++		compatible = "aspeed,ast2500-sdram-edac", "syscon";
+ 		reg = <0x1e6e0000 0x174>;
+ 		interrupts = <0>;
+ 		status = "disabled";
+@@ -263,6 +264,18 @@
  				interrupts = <0x19>;
  			};
  
 +			xdma: xdma@1e6e7000 {
 +				compatible = "aspeed,ast2500-xdma";
 +				reg = <0x1e6e7000 0x100>;
++				clocks = <&syscon ASPEED_CLK_GATE_BCLK>;
 +				resets = <&syscon ASPEED_RESET_XDMA>;
 +				interrupts-extended = <&vic 6>, <&scu_ic ASPEED_AST2500_SCU_IC_PCIE_RESET_LO_TO_HI>;
++				pcie-device = "bmc";
++				scu = <&syscon>;
++				sdmc = <&edac>;
 +				status = "disabled";
 +			};
 +
