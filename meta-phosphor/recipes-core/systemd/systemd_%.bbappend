@@ -4,7 +4,6 @@ PACKAGES =+ "${PN}-catalog-extralocales"
 PACKAGECONFIG = "\
         coredump \
         hostnamed \
-        kmod \
         networkd \
         pam \
         randomseed \
