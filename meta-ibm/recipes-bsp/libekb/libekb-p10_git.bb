@@ -10,7 +10,8 @@ LIC_FILES_CHKSUM = "file://${S}/LICENSE;md5=3b83ef96387f14655fc854ddc3c6bd57"
 S = "${WORKDIR}/git"
 
 inherit autotools \
-        pythonnative
+        pythonnative \
+        perlnative
 
 SRCREV_FORMAT = "libekb_ekb"
 
