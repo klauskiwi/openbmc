@@ -25,6 +25,6 @@ SRC_URI += "file://fapi-attributes-xml.patch"
 SRC_URI += "file://ekb_SegFault_Fix.patch"
 SRC_URI += "file://ekb_Add_missing_include_file_required_for_memcpy.patch"
 
-DEPENDS = "pdbg pdata"
+DEPENDS = "pdbg pdata libxml-simple-perl-native"
 
 BBCLASSEXTEND = "native"
