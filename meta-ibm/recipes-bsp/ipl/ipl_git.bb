@@ -12,9 +12,7 @@ inherit autotools
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://git@github.ibm.com/phal/ipl;protocol=ssh"
-SRCREV = "48e49396665d8df77928376d909ca5a555e5cb76"
-
-SRC_URI += "file://enable-istep0-procedures-only-p10.patch"
+SRCREV = "04ca607eded4adb7458d29660798cd8f29ab7f9f"
 
 DEPENDS = " \
         libekb-p10 pdbg pdata autoconf-archive \
