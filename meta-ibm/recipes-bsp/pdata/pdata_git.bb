@@ -12,7 +12,7 @@ S = "${WORKDIR}/git"
 inherit autotools
 
 SRC_URI = "git://git@github.ibm.com/phal/pdata;protocol=ssh"
-SRCREV = "d68b33f5540ee02963c897ef47aebce73fcfcb14"
+SRCREV = "aea322dfbbf1e80946e7743f7e583409664150b6"
 
 DEPENDS = "pdbg"
 
