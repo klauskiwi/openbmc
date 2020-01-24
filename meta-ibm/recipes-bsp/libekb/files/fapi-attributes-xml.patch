@@ -1,8 +1,8 @@
 diff --git a/Makefile.am b/Makefile.am
-index 3d18a5c..2f0196c 100644
+index 8fadc58..d624a1e 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -21,25 +21,16 @@ ATTRIB_XML = \
+@@ -21,25 +21,18 @@ ATTRIB_XML = \
  	$(EKB)/hwpf/fapi2/xml/attribute_info/system_attributes.xml \
  	$(EKB)/hwpf/fapi2/xml/attribute_info/unit_attributes.xml \
  \
@@ -16,10 +16,10 @@ index 3d18a5c..2f0196c 100644
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_ipl_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_ipl_customize_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_memory_bars_attributes.xml \
--	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_nest_attributes.xml \
+ 	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_nest_attributes.xml \
 -	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_omi_init.xml \
 -	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_omi_setup_bars.xml \
--	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_pervasive_attributes.xml \
+ 	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_pervasive_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_qme_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_runn_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_sbe_load_bootloader_attributes.xml \

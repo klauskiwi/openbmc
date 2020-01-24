@@ -21,7 +21,6 @@ SRCREV_ekb = "9ed077356c168629776a007dd422d8d35100ca9e"
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
             git://git@github.ibm.com/openbmc/ekb;destsuffix=git/ekb;name=ekb;branch=master-p10;protocol=ssh"
 
-SRC_URI += "file://enable-istep0-procedures-only-p10.patch"
 SRC_URI += "file://fapi-attributes-xml.patch"
 SRC_URI += "file://ekb_SegFault_Fix.patch"
 SRC_URI += "file://ekb_Add_missing_include_file_required_for_memcpy.patch"
