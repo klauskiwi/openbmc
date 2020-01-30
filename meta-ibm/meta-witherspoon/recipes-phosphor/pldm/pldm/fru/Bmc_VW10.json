@@ -2,11 +2,12 @@
    "record_details":
    {
         "fru_record_type" : 254,
-        "encoding_type": 1
+        "fru_encoding_type": 1,
+        "dbus_interface_name": "xyz.openbmc_project.Inventory.Item.Bmc"
    },
-   "fields":[
+   "fru_fields":[
      {
-         "field_type" : 2,
+         "fru_field_type" : 2,
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",
@@ -15,7 +16,7 @@
             }
       },
       {
-         "field_type" : 3,
+         "fru_field_type" : 3,
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",
@@ -24,7 +25,7 @@
             }
       },
       {
-         "field_type" : 4,
+         "fru_field_type" : 4,
          "dbus":
             {
                "interface" : "com.ibm.ipzvpd.VW10",
