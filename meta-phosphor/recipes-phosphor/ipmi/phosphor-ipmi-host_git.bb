@@ -52,6 +52,9 @@ RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-state-manager}"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-version}"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_obmc-bmc-updater}"
 
+# TODO Temporarily remove this service until rainier simics moves to emmc
+RDEPENDS_${PN}_remove_rainier += "clear-once"
+
 inherit useradd
 
 USERADD_PACKAGES = "${PN}"
