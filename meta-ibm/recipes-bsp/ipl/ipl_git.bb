@@ -12,7 +12,7 @@ inherit autotools
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://git@github.ibm.com/phal/ipl;protocol=ssh"
-SRCREV = "04ca607eded4adb7458d29660798cd8f29ab7f9f"
+SRCREV = "6d0f8cc3ad76d95e49336e5beec3e3f9c1836435"
 
 DEPENDS = " \
         libekb-p10 pdbg pdata autoconf-archive \
