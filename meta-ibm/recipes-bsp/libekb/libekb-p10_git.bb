@@ -18,8 +18,9 @@ SRCREV_FORMAT = "libekb_ekb"
 SRCREV_libekb = "c8fb4ec13bef4c78d4761a03609a4d0306ff7b1a"
 SRCREV_ekb = "9ed077356c168629776a007dd422d8d35100ca9e"
 
-SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
-            git://git@github.ibm.com/openbmc/ekb;destsuffix=git/ekb;name=ekb;branch=master-p10;protocol=ssh"
+EKB_BRANCH = "master-p10"
+SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;destsuffix=git/.libekb;name=libekb;protocol=ssh;bareclone=1 \
+           git://git@github.ibm.com/openbmc/ekb;destsuffix=git/.ekb;name=ekb;branch=${EKB_BRANCH};protocol=ssh;bareclone=1"
 
 SRC_URI += "file://fapi-attributes-xml.patch"
 SRC_URI += "file://ekb_SegFault_Fix.patch"
@@ -28,3 +29,21 @@ SRC_URI += "file://ekb_Add_missing_include_file_required_for_memcpy.patch"
 DEPENDS = "pdbg pdata libxml-simple-perl-native"
 
 BBCLASSEXTEND = "native"
+
+flatten_repository_tree () {
+    # Flatten the git repos into one directory
+    GIT_DIR=${S}/.libekb git archive --format=tar HEAD | (mkdir -p ${S} && cd ${S} && tar xf -)
+    GIT_DIR=${S}/.ekb git archive --format=tar ${EKB_BRANCH} | (mkdir -p ${S}/ekb && cd ${S}/ekb && tar xf -)
+
+    # Make the directory a git repo so do_patch() carries on
+    cd ${S}
+    GIT_OPTS="-c user.name=OpenEmbedded -c user.email=oe.patch@oe"
+    git ${GIT_OPTS} init
+    git ${GIT_OPTS} add .
+    git ${GIT_OPTS} commit -m "Import"
+    cd -
+}
+
+do_unpack_append() {
+    bb.build.exec_func('flatten_repository_tree', d)
+}
