@@ -20,11 +20,12 @@ SRCREV_ekb = "9ed077356c168629776a007dd422d8d35100ca9e"
 
 EKB_BRANCH = "master-p10"
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;destsuffix=git/.libekb;name=libekb;protocol=ssh;bareclone=1 \
-           git://git@github.ibm.com/openbmc/ekb;destsuffix=git/.ekb;name=ekb;branch=${EKB_BRANCH};protocol=ssh;bareclone=1"
-
-SRC_URI += "file://fapi-attributes-xml.patch"
-SRC_URI += "file://ekb_SegFault_Fix.patch"
-SRC_URI += "file://ekb_Add_missing_include_file_required_for_memcpy.patch"
+           git://git@github.ibm.com/openbmc/ekb;destsuffix=git/.ekb;name=ekb;branch=${EKB_BRANCH};protocol=ssh;bareclone=1 \
+           file://fapi-attributes-xml.patch \
+           file://ekb_SegFault_Fix.patch \
+           file://ekb_Add_missing_include_file_required_for_memcpy.patch \
+           file://0001-p10_do_fw_hb_istep-Fix-ICE-on-modern-g.patch \
+           "
 
 DEPENDS = "pdbg pdata libxml-simple-perl-native"
 
