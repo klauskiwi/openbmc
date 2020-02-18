@@ -1,0 +1,25 @@
+From 42fbe2cfbb27aad14a292fae3716bb356a3362cf Mon Sep 17 00:00:00 2001
+From: Andrew Jeffery <andrew@aj.id.au>
+Date: Wed, 12 Feb 2020 21:23:59 +1030
+Subject: [PATCH] ARM: dts: rainier: Enable vuart2
+
+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+---
+ arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+index 177fef575f45..853847acff30 100644
+--- a/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
++++ b/arch/arm/boot/dts/aspeed-bmc-ibm-rainier.dts
+@@ -666,6 +666,10 @@
+ 	status = "okay";
+ };
+ 
++&vuart2 {
++	status = "okay";
++};
++
+ &lpc_ctrl {
+ 	status = "okay";
+ 	memory-region = <&flash_memory>;

@@ -19,6 +19,7 @@ pldm_kernel_patches = " \
     file://0002-ARM-dts-aspeed-rainier-Enable-KCS-device.patch \
     file://0001-ARM-dts-aspeed-rainier-Add-gpio-keys-polled-for-fans.patch \
     file://0001-ARM-dts-aspeed-rainier-Set-MAX31785-config.patch \
+    file://0020-ARM-dts-rainier-Enable-vuart2.patch \
 "
 SRC_URI_append_ibm-ac-server = " file://witherspoon.cfg ${pldm_kernel_patches}"
 SRC_URI_append_rainier = " file://rainier.cfg ${pldm_kernel_patches}"
