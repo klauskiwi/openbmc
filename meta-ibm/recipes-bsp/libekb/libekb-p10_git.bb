@@ -15,7 +15,7 @@ inherit autotools \
 
 SRCREV_FORMAT = "libekb_ekb"
 
-SRCREV_libekb = "c8fb4ec13bef4c78d4761a03609a4d0306ff7b1a"
+SRCREV_libekb = "c303ff00cf6050b7e69d818a05aa8e33d7754671"
 SRCREV_ekb = "9ed077356c168629776a007dd422d8d35100ca9e"
 
 EKB_BRANCH = "master-p10"
