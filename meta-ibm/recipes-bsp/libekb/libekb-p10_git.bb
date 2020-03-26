@@ -24,8 +24,6 @@ EKB_BRANCH = "master-p10"
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;destsuffix=git/.libekb;branch=${LIBEKB_BRANCH};name=libekb;protocol=ssh;bareclone=1 \
            git://git@github.ibm.com/openbmc/ekb;destsuffix=git/.ekb;name=ekb;branch=${EKB_BRANCH};protocol=ssh;bareclone=1 \
            file://fapi-attributes-xml.patch \
-           file://ekb_SegFault_Fix.patch \
-           file://ekb_Add_missing_include_file_required_for_memcpy.patch \
            file://0001-p10_do_fw_hb_istep-Fix-ICE-on-modern-g.patch \
            "
 
