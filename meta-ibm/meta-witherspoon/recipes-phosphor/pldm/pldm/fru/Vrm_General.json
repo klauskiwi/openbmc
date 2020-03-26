@@ -2,20 +2,12 @@
    "record_details":
    {
         "fru_record_type" : 1,
-<<<<<<< HEAD
         "fru_encoding_type": 1,
         "dbus_interface_name": "xyz.openbmc_project.Inventory.Item.Vrm"
    },
    "fru_fields":[
       {
          "fru_field_type" : 2,
-=======
-        "encoding_type": 1
-   },
-   "fields":[
-      {
-         "field_type" : 2,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Decorator.Asset",
@@ -24,11 +16,7 @@
             }
       },
       {
-<<<<<<< HEAD
          "fru_field_type" : 3,
-=======
-         "field_type" : 3,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Decorator.Asset",
@@ -37,11 +25,7 @@
             }
       },
       {
-<<<<<<< HEAD
          "fru_field_type" : 4,
-=======
-         "field_type" : 4,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Decorator.Asset",
@@ -50,11 +34,7 @@
             }
       },
       {
-<<<<<<< HEAD
          "fru_field_type" : 5,
-=======
-         "field_type" : 5,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Decorator.Asset",
@@ -63,11 +43,7 @@
             }
       },
       {
-<<<<<<< HEAD
          "fru_field_type" : 8,
-=======
-         "field_type" : 8,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Item",
@@ -76,11 +52,7 @@
             }
       },
       {
-<<<<<<< HEAD
          "fru_field_type" : 11,
-=======
-         "field_type" : 11,
->>>>>>> GHE: pldm: add config JSONs for PLDM FRU transfer
          "dbus":
             {
                "interface" : "xyz.openbmc_project.Inventory.Decorator.AssetTag",
