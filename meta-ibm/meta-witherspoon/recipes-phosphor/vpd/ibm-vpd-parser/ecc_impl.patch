@@ -1,18 +1,22 @@
-From 9eca25b64bf9aa71e5a79c296ab9261dad538856 Mon Sep 17 00:00:00 2001
-From: Alpana Kumari <alpankum@in.ibm.com>
-Date: Thu, 9 Jan 2020 03:16:47 -0600
-Subject: [PATCH] ECC check Implementation
+From c6a18a33f427b4d03464ee61a87097f52f4a091f Mon Sep 17 00:00:00 2001
+From: Santosh Puranik <santosh.puranik@in.ibm.com>
+Date: Tue, 31 Mar 2020 07:53:20 -0500
+Subject: [PATCH] Add VPD ECC Support
 
-Change-Id: Iee8e4db20dc34ce802a59fd5466a84088144b624
-Signed-off-by: Alpana Kumari <alpankum@in.ibm.com>
+This commit adds the real VPD ECC support
+for IBM IPZ VPD. This is up and over a default
+implementation that does not check any VPD.
+
+Signed-off-by: Santosh Puranik <santosh.puranik@in.ibm.com>
+Change-Id: I12493fe4da55f7818c209c1481e88597df6cdb1e
 ---
- vpdecc/vpdecc.c         | 145 +++++++++++++++++--
+ vpdecc/vpdecc.c         | 141 +++++++++++++++++-
  vpdecc/vpdecc_support.c | 370 ++++++++++++++++++++++++++++++++++++++++++++----
  vpdecc/vpdecc_support.h | 108 ++++++++++++++
- 3 files changed, 591 insertions(+), 32 deletions(-)
+ 3 files changed, 589 insertions(+), 30 deletions(-)
 
 diff --git a/vpdecc/vpdecc.c b/vpdecc/vpdecc.c
-index f7cf7eb..5956ad6 100644
+index f7cf7eb..46f4404 100644
 --- a/vpdecc/vpdecc.c
 +++ b/vpdecc/vpdecc.c
 @@ -1,21 +1,150 @@
@@ -40,40 +44,39 @@ index f7cf7eb..5956ad6 100644
 +	"US Government Users Restricted Rights - Use, duplication\n"
 +	"or disclosure restricted by GSA ADP Schedule Contract\n"
 +	"with IBM Corp.";
++
  
--#include <string.h>
- 
-+#include <string.h>
+ #include <string.h>
 +#include "vpdecc.h"
 +#include "vpdecc_support.h"
-+/*
+ 
  int vpdecc_create_ecc(const unsigned char* data, size_t data_length,
                        unsigned char* ecc, size_t* ecc_buffersize)
  {
 -    int i, vRet = 0;
 +   size_t i;
 +   int vPosition,vRet = 0;
-+   *******************************************/
++   /********************************************/
 +   /* to make sure that it is accessable       */
 +   /* with a block size of 44 bytes            */
 +   /* 4Bytes ECC <-> 11 bit scrambling         */
 +   /********************************************/
-+/*   size_t vBlocks       = (data_length+3)/4;
++   size_t vBlocks       = (data_length+3)/4;
 +   size_t vBufferLength = vBlocks*4;
 +   size_t vEccLength    = vBlocks;
- 
--    memset(ecc, 0, *ecc_buffersize);
++
 +   
 +   unsigned char* pRawDataBuffer  = NULL;
 +   unsigned char* pDataBuffer  = NULL;
 +   unsigned char* pEccBuffer  = NULL;
-+*/   
++   
 +   /********************************************/
 +   /* check if the buffer delivered by the     */
 +   /* invoking procedure is large enough       */
 +   /* to store the ecc                         */
 +   /********************************************/
-+/*
+ 
+-    memset(ecc, 0, *ecc_buffersize);
 +   if(vEccLength > *ecc_buffersize)
 +   {
 +      return VPD_ECC_NOT_ENOUGH_BUFFER;
@@ -82,23 +85,22 @@ index f7cf7eb..5956ad6 100644
 +   pRawDataBuffer = malloc(vBufferLength);
 +   pDataBuffer = malloc(vBufferLength);
 +   pEccBuffer = malloc(vEccLength);
-+  */ 
++   
 +   /***********************************************************************************/
 +   /* first of all the data will be scrabled for a higher probability to be able to   */
 +   /* correct the errors. The bits used for one ecc-word are ditributed over the      */
 +   /* whole memory. Therefore it does not matter if a specific byte is not readable   */
 +   /***********************************************************************************/
-+/*
-+   memset(pRawDataBuffer,0x00,vBufferLength);
-+   memset(pDataBuffer,0x00,vBufferLength);
  
 -    return vRet;
--}
++   memset(pRawDataBuffer,0x00,vBufferLength);
++   memset(pDataBuffer,0x00,vBufferLength);
++
 +   memcpy(pRawDataBuffer,data,data_length);
 +   
 +   seepromScramble(VPD_ECC_DATA_BIT_OFFSET, pRawDataBuffer, vBufferLength, 
 +                     pDataBuffer, vBufferLength);
- 
++
 +   for (i=0; i < vEccLength; i++)
 +   {
 +      vPosition = i*4;
@@ -112,8 +114,8 @@ index f7cf7eb..5956ad6 100644
 +   free (pDataBuffer);
 +   free (pEccBuffer);
 +   return vRet;
-+}
-+*/
+ }
+ 
  int vpdecc_check_data(unsigned char* data, size_t data_length,
                        const unsigned char* ecc, size_t ecc_length)
  {
@@ -756,5 +758,5 @@ index 6f71c03..37276d6 100644
 +
 +#endif /* endif _PXESCSEEPROMSUPPORT_H_ */
 -- 
-1.8.3.1
+2.9.3
 
