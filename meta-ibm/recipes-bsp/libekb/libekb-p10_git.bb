@@ -16,12 +16,11 @@ inherit autotools \
 SRCREV_FORMAT = "libekb_ekb"
 
 SRCREV_libekb = "e3af3b246d7dbf20d81d74b55c163b1fde23d71a"
-SRCREV_ekb = "9ed077356c168629776a007dd422d8d35100ca9e"
+SRCREV_ekb = "289ff52f89894e39211150444ff3e9fc296e67df"
 
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
            git://git@github.ibm.com/openbmc/ekb;destsuffix=git/ekb;name=ekb;branch=master-p10;protocol=ssh \
            file://fapi-attributes-xml.patch \
-           file://0001-p10_do_fw_hb_istep-Fix-ICE-on-modern-g.patch \
            "
 
 DEPENDS = "pdbg pdata libxml-simple-perl-native"
