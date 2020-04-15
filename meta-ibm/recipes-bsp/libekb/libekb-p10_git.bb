@@ -12,12 +12,12 @@ S = "${WORKDIR}/git"
 require recipes-bsp/ekb/ekb_p10.inc
 
 inherit autotools \
-        pythonnative \
+        python3native \
         perlnative
 
 SRCREV_FORMAT = "libekb_ekb"
 
-SRCREV_libekb = "e3af3b246d7dbf20d81d74b55c163b1fde23d71a"
+SRCREV_libekb = "213eca3d790af808320192b729b2d4cf3ec4e29a"
 SRCREV_ekb = "${EKB_REV}"
 
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
@@ -25,7 +25,7 @@ SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
            file://fapi-attributes-xml.patch \
            "
 
-DEPENDS = "pdbg pdata libxml-simple-perl-native"
+DEPENDS = "pdbg libxml-simple-perl-native"
 
 # During compilation race condition issue is happening, so getting different
 # different error due to make targets rule dependency ( mostly found auto code generation ).

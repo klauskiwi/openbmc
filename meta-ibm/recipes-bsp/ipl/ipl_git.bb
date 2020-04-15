@@ -17,7 +17,7 @@ SRCREV = "ac1fb69e2ed33f94d945327b9e9eb54258a3c8f9"
 SRC_URI += "file://enable-istep0-procedures-only-p9.patch"
 
 DEPENDS = " \
-        ${@getlibekb_depend(d)} pdbg pdata autoconf-archive \
+        ${@getlibekb_depend(d)} pdbg autoconf-archive \
         "
 
 RDEPENDS_${PN} = "generate-dtb"
