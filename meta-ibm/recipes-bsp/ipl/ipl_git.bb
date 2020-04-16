@@ -20,6 +20,6 @@ DEPENDS = " \
         ${@getlibekb_depend(d)} pdbg autoconf-archive \
         "
 
-RDEPENDS_${PN} = "generate-dtb"
+RDEPENDS_${PN} = "power-devtree"
 
 EXTRA_OECONF = "CHIP=${TARGET_PROC}"
