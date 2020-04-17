@@ -4,7 +4,7 @@ LICENSE = "Apache-2.0 | GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0d30807bb7a4f16d36e96b78f9ed8fae"
 SRC_URI = "git://git@github.ibm.com/openbmc/libmctp.git;protocol=ssh;branch=astlpc-mtu-248 \
            "
-SRCREV = "0b20b2a20554c2c103c4580ba00100e8a553d42a"
+SRCREV = "4f70a4a342f85b3dca6f78094da5f8d111dd4941"
 
 PR = "r1"
 PV = "0.9+git${SRCPV}"
