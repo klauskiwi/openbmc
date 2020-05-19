@@ -30,7 +30,6 @@ SYSTEMD_ENVIRONMENT_FILE_phosphor-cooling-type_append_ibm-ac-server = " ${@compo
 SYSTEMD_ENVIRONMENT_FILE_phosphor-cooling-type_append_mihawk = " ${@compose_list(d, 'COOLING_ENV_FMT', 'OBMC_CHASSIS_INSTANCES')}"
 
 #These services are protected by the watchdog
-SYSTEMD_OVERRIDE_phosphor-fan-control_witherspoon += "fan-watchdog-monitor.conf:phosphor-fan-control-init@0.service.d/fan-watchdog-monitor.conf"
 SYSTEMD_OVERRIDE_phosphor-fan-control_witherspoon += "fan-watchdog-monitor.conf:phosphor-fan-control@0.service.d/fan-watchdog-monitor.conf"
 SYSTEMD_OVERRIDE_phosphor-fan-monitor_witherspoon += "fan-watchdog-monitor.conf:phosphor-fan-monitor-init@0.service.d/fan-watchdog-monitor.conf"
 SYSTEMD_OVERRIDE_phosphor-fan-monitor_witherspoon += "fan-watchdog-monitor.conf:phosphor-fan-monitor@0.service.d/fan-watchdog-monitor.conf"
@@ -45,9 +44,12 @@ SYSTEMD_OVERRIDE_phosphor-fan-monitor_witherspoon += "fan-watchdog-conflicts.con
 SYSTEMD_OVERRIDE_phosphor-fan-control_rainier += "fan-watchdog-conflicts.conf:phosphor-fan-control@0.service.d/fan-watchdog-conflicts.conf"
 SYSTEMD_OVERRIDE_phosphor-fan-monitor_rainier += "fan-watchdog-conflicts.conf:phosphor-fan-monitor@0.service.d/fan-watchdog-conflicts.conf"
 
-# Witherspoon fan control service linking
-# Link fan control init service
-SYSTEMD_LINK_${PN}-control_witherspoon += "${@compose_list(d, 'FMT_CONTROL_INIT', 'OBMC_CHASSIS_INSTANCES')}"
+# Remove fan control init service completely
+SYSTEMD_SERVICE_${PN}-control_remove_witherspoon = "${TMPL_CONTROL_INIT}"
+SYSTEMD_LINK_${PN}-control_remove_witherspoon = "${@compose_list(d, 'FMT_CONTROL_INIT', 'OBMC_CHASSIS_INSTANCES')}"
+# Remove fan control from being linked
+SYSTEMD_LINK_${PN}-control_remove_witherspoon = "${@compose_list(d, 'FMT_CONTROL', 'OBMC_CHASSIS_INSTANCES')}"
+
 # Link fan control service to be started at standby
 FMT_CONTROL_STDBY_witherspoon = "../${TMPL_CONTROL}:${MULTI_USR_TGT}.wants/${INSTFMT_CONTROL}"
 SYSTEMD_LINK_${PN}-control_witherspoon += "${@compose_list(d, 'FMT_CONTROL_STDBY', 'OBMC_CHASSIS_INSTANCES')}"
