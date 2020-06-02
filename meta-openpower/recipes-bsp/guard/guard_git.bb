@@ -11,6 +11,9 @@ inherit meson
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://git@github.ibm.com/open-power/guard;branch="master-p10";protocol=ssh"
-SRCREV = "516c4ffb94682d39e648e79f8452655cd3ff65b6"
+SRCREV = "6ea467ef100ae5362946cfa520dfb84829588e66"
 
 DEPENDS = "cli11"
+
+PACKAGECONFIG ??= "${@bb.utils.contains('OBMC_MACHINE_FEATURES', 'phal', 'phal', '', d)}"
+PACKAGECONFIG[phal] = "-Ddevtree=enabled, -Ddevtree=disabled, pdata pdbg"
