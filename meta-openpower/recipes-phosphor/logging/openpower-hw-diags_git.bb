@@ -25,3 +25,17 @@ DEPENDS = "boost libgpiod pdbg phosphor-logging sdbusplus openpower-libhei \
 
 # This is required so that libhei is installed with the chip data files.
 RDEPENDS_${PN} += "openpower-libhei"
+# store chip data file binaries in root filesystem - begin
+SRC_URI += "file://chip_data_ocmb.cdb file://chip_data_proc.cdb"
+
+do_install_append() {
+SRC=${WORKDIR}
+DEST=${D}${datadir}/openpower-hw-diags
+
+install -d ${DEST}
+install -m 0644 ${SRC}/chip_data_ocmb.cdb ${DEST}
+install -m 0644 ${SRC}/chip_data_proc.cdb ${DEST}
+}
+
+FILES_${PN} += "${DEST}/chip_data_ocmb.cdb ${DEST}/chip_data_proc.cdb"
+# store chip data file binaries in root filesystem - end
