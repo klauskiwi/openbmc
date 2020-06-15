@@ -4,10 +4,10 @@ LICENSE = "Apache-2.0 | GPLv2+"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=0d30807bb7a4f16d36e96b78f9ed8fae"
 SRC_URI = "git://git@github.ibm.com/openbmc/libmctp.git;protocol=ssh;branch=astlpc-mtu-248 \
            "
-SRCREV = "4f70a4a342f85b3dca6f78094da5f8d111dd4941"
+SRCREV = "4f488ee14111fa6d601d9c1f25d3d8cdbd6121c3"
 
 PR = "r1"
-PV = "0.9+git${SRCPV}"
+PV = "0.10+git${SRCPV}"
 
 inherit autotools
 inherit systemd
