@@ -17,10 +17,10 @@ inherit autotools \
 
 SRCREV_FORMAT = "libekb_ekb"
 
-SRCREV_libekb = "213eca3d790af808320192b729b2d4cf3ec4e29a"
+SRCREV_libekb = "67d0ff53317bea85261dcf0975e44a9fc4281599"
 SRCREV_ekb = "${EKB_REV}"
 
-SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;nobranch=1;protocol=ssh \
+SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
            ${EKB_URI};name=ekb;destsuffix=git/ekb \
            file://fapi-attributes-xml.patch \
            "
