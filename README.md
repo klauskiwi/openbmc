@@ -53,10 +53,10 @@ f0b                     olympus                    swift
 fp5280g2                olympus-nuvoton            tiogapass
 gsj                     on5263m5                   vesnin
 hr630                   palmetto                   witherspoon
-hr855xg2                qemuarm                    witherspoon-128
-lanyang                 quanta-q71l                witherspoon-tacoma
-mihawk                  rainier                    yosemitev2
-msn                     romulus                    zaius
+hr855xg2                qemuarm                    witherspoon-tacoma
+lanyang                 quanta-q71l                yosemitev2
+mihawk                  rainier                    zaius
+msn                     romulus
 neptune                 s2600wf
 ```
 
