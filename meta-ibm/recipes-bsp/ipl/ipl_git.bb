@@ -12,7 +12,7 @@ inherit autotools phal
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://git@github.ibm.com/phal/ipl;protocol=ssh"
-SRCREV = "880ec912f6d5da89667997d20e64ca5ee8651b92"
+SRCREV = "3a99a2dc82d8a8ffeef01e230de7ba166fc9ef96"
 
 SRC_URI += "file://enable-istep0-procedures-only-p9.patch"
 
