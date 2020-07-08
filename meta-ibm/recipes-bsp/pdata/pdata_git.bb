@@ -14,24 +14,18 @@ inherit autotools \
         mrw-xml
 
 SRC_URI = "git://git@github.ibm.com/phal/pdata;protocol=ssh"
-SRCREV = "6f9da8cfc506cb31f4be15f638df1413d0f3b359"
+SRCREV = "6c37e31b74c6a6e159c25d2c06562c9e50cf0a1c"
 
 DEPENDS = "pdbg \
            libxml-simple-perl-native \
            libxml-libxml-perl-native \
            mrw-native \
-           ekb-native"
-
-FILES_${PN} += "${datadir}"
+           ekb-native \
+           autoconf-archive"
 
 BBCLASSEXTEND = "native"
 
-# Make sure c++11 is used for native and nativesdk build
-# Because, pdata using c++11 features
-BUILD_CXXFLAGS += "-std=c++11"
-BUILDSDK_CXXFLAGS += "-std=c++11"
-
-EXTRA_OECONF = "--enable-gen_attrsinfoheader"
+EXTRA_OECONF = "--enable-gen_attrsinfo CHIP=${TARGET_PROC}"
 EXTRA_OEMAKE = "SYSTEM_NAME=${MACHINE} \
                 TARGET_PROC=${TARGET_PROC} \
                 SYSTEM_MRW_XML=${STAGING_DIR_NATIVE}${mrw_datadir}/${MRW_XML} \
