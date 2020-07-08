@@ -15,5 +15,5 @@ SRCREV = "c19eda284f38bbb20b7775d9f71af3361fad7f1a"
 
 DEPENDS = "cli11"
 
-PACKAGECONFIG ??= "${@bb.utils.contains('OBMC_MACHINE_FEATURES', 'phal', 'phal', '', d)}"
+PACKAGECONFIG ??= "${@bb.utils.filter('OBMC_MACHINE_FEATURES', 'phal', d)}"
 PACKAGECONFIG[phal] = "-Ddevtree=enabled, -Ddevtree=disabled, pdata pdbg"
