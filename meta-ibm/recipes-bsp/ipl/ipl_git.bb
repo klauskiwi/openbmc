@@ -12,12 +12,12 @@ inherit autotools phal
 S = "${WORKDIR}/git"
 
 SRC_URI = "git://git@github.ibm.com/phal/ipl;protocol=ssh"
-SRCREV = "3a99a2dc82d8a8ffeef01e230de7ba166fc9ef96"
+SRCREV = "61e65417f058e256b1c13f9448a2bb3b9227de46"
 
 SRC_URI += "file://enable-istep0-procedures-only-p9.patch"
 
 DEPENDS = " \
-        ${@getlibekb_depend(d)} pdbg autoconf-archive \
+        ${@getlibekb_depend(d)} pdbg autoconf-archive guard \
         "
 
 RDEPENDS_${PN} = "power-devtree"
