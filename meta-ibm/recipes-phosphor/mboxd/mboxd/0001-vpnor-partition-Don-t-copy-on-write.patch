@@ -1,0 +1,33 @@
+From 07a85a5bb0613bb92cd9e79da929b53609b113fc Mon Sep 17 00:00:00 2001
+From: Adriana Kobylak <anoo@us.ibm.com>
+Date: Fri, 17 Jul 2020 15:01:18 -0500
+Subject: [PATCH] vpnor/partition: Don't copy on write
+
+The filesystem is read-write, so the read-only and read-write
+links point to the same directory. Don't attempt to write the
+same file.
+
+Change-Id: If09d6af17f137f441fb22cd94dff542beff83eaa
+Signed-off-by: Adriana Kobylak <anoo@us.ibm.com>
+---
+ vpnor/partition.cpp | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/vpnor/partition.cpp b/vpnor/partition.cpp
+index cfefc0a..0ef2295 100644
+--- a/vpnor/partition.cpp
++++ b/vpnor/partition.cpp
+@@ -90,8 +90,8 @@ fs::path Request::getPartitionFilePath(int flags)
+     }
+ 
+     dst /= partition.data.name;
+-    fs::copy_file(src, dst);
+-    fs::permissions(dst, fs::perms::add_perms | fs::perms::owner_write);
++    // fs::copy_file(src, dst);
++    // fs::permissions(dst, fs::perms::add_perms | fs::perms::owner_write);
+ 
+     return dst;
+ }
+-- 
+1.8.3.1
+
