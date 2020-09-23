@@ -5,7 +5,6 @@ PV = "1.0+git${SRCPV}"
 LICENSE     = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
 
-#TODO: Need to use TARGET_PROC instead p10, once device tree generation is enabled for p9
 require ekb_p10.inc
 
 SRC_URI = "${EKB_URI}"

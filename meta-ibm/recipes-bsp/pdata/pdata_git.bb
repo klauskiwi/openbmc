@@ -23,6 +23,9 @@ DEPENDS = "pdbg \
 
 BBCLASSEXTEND = "native"
 
-EXTRA_OECONF = "--enable-gen_attrsinfo CHIP=${TARGET_PROC}"
+PDATA_CONFARG = ""
+PDATA_CONFARG_ibm-power9-cpu = "CHIP=p9"
+PDATA_CONFARG_ibm-power10-cpu = "CHIP=p10"
+EXTRA_OECONF = "--enable-gen_attrsinfo ${PDATA_CONFARG}"
 
 EXTRA_OEMAKE = "EKB=${STAGING_DATADIR_NATIVE}/ekb/"

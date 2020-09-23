@@ -25,4 +25,5 @@ DEPENDS = " \
 
 RDEPENDS_${PN} = "power-devtree"
 
-EXTRA_OECONF = "CHIP=${TARGET_PROC}"
+EXTRA_OECONF_ibm-power9-cpu = "CHIP=p9"
+EXTRA_OECONF_ibm-power10-cpu = "CHIP=p10"
