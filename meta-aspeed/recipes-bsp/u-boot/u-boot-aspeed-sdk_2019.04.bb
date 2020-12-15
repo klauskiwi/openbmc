@@ -7,6 +7,7 @@ require u-boot-aspeed.inc
 PROVIDES += "u-boot"
 DEPENDS += "bc-native dtc-native"
 
+SRC_URI += " file://0001-Port-Aspeed2400-and-2500-configurations.patch"
 SRC_URI_append_df-phosphor-mmc = " file://u-boot-env-ast2600.txt"
 
 UBOOT_ENV_SIZE_df-phosphor-mmc = "0x10000"

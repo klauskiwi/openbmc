@@ -1,0 +1,136 @@
+From 0a699a5816ef07193fd05868a2e735c17a3decb4 Mon Sep 17 00:00:00 2001
+From: Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>
+Date: Tue, 15 Dec 2020 21:45:21 -0600
+Subject: [PATCH] Port Aspeed2400 and 2500 configurations
+
+Signed-off-by: Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>
+---
+ configs/ast_g4_ncsi_defconfig       | 11 +++++++++
+ configs/ast_g4_phy_defconfig        | 14 ++++++++++++
+ configs/ast_g5_ncsi_2boot_defconfig | 35 +++++++++++++++++++++++++++++
+ configs/ast_g5_ncsi_defconfig       | 13 +++++++++++
+ configs/ast_g5_phy_defconfig        | 14 ++++++++++++
+ 5 files changed, 87 insertions(+)
+ create mode 100644 configs/ast_g4_ncsi_defconfig
+ create mode 100644 configs/ast_g4_phy_defconfig
+ create mode 100644 configs/ast_g5_ncsi_2boot_defconfig
+ create mode 100644 configs/ast_g5_ncsi_defconfig
+ create mode 100644 configs/ast_g5_phy_defconfig
+
+diff --git a/configs/ast_g4_ncsi_defconfig b/configs/ast_g4_ncsi_defconfig
+new file mode 100644
+index 0000000000..a56401c765
+--- /dev/null
++++ b/configs/ast_g4_ncsi_defconfig
+@@ -0,0 +1,11 @@
++CONFIG_ARM=y
++CONFIG_SYS_TEXT_BASE=0x0
++CONFIG_ENV_SIZE=0x10000
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_SYS_PROMPT="ast# "
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PING=y
++CONFIG_SYS_NS16550=y
++# CONFIG_EFI_LOADER is not set
+diff --git a/configs/ast_g4_phy_defconfig b/configs/ast_g4_phy_defconfig
+new file mode 100644
+index 0000000000..f8db39ef13
+--- /dev/null
++++ b/configs/ast_g4_phy_defconfig
+@@ -0,0 +1,14 @@
++CONFIG_ARM=y
++CONFIG_TARGET_AST_G4=y
++CONFIG_ASPEED_NET_PHY=y
++CONFIG_SYS_PROMPT="ast# "
++CONFIG_CMD_BOOTEFI=n
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PING=y
++CONFIG_EFI_LOADER=n
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_OF_LIBFDT=y
++CONFIG_SPI_FLASH=y
++CONFIG_SYS_NS16550=y
+diff --git a/configs/ast_g5_ncsi_2boot_defconfig b/configs/ast_g5_ncsi_2boot_defconfig
+new file mode 100644
+index 0000000000..2d28c86966
+--- /dev/null
++++ b/configs/ast_g5_ncsi_2boot_defconfig
+@@ -0,0 +1,35 @@
++CONFIG_ARM=y
++CONFIG_TARGET_AST_G5=y
++CONFIG_SYS_PROMPT="ast# "
++CONFIG_CMD_BOOTEFI=n
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PING=y
++CONFIG_EFI_LOADER=n
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_OF_LIBFDT=y
++CONFIG_SPI_FLASH=y
++CONFIG_SYS_NS16550=y
++CONFIG_FIRMWARE_2ND_BOOT=y
++CONFIG_AUTOBOOT=y
++CONFIG_AUTOBOOT_KEYED=y
++CONFIG_AUTOBOOT_PROMPT="\nBooting the BMC in %d seconds. Type the password to stop autoboot.\n"
++CONFIG_AUTOBOOT_STOP_STR="0penBmc"
++CONFIG_CMD_SAVEENV=y
++CONFIG_CMDLINE=y
++CONFIG_BOOTDELAY=5
++CONFIG_NETDEVICES=y
++CONFIG_CMD_GREPENV=y
++CONFIG_CMD_MEMINFO=y
++CONFIG_CMD_EXT2=y
++CONFIG_CMD_FAT=y
++CONFIG_EXPERT=y
++CONFIG_REGEX=y
++CONFIG_CMD_IMI=y
++CONFIG_CMD_IMLS=y
++CONFIG_CMD_MEMORY=y
++CONFIG_CMD_CRC32=y
++CONFIG_LOOPW=y
++CONFIG_CMD_MEMTEST=y
++CONFIG_CMD_MX_CYCLIC=y
+diff --git a/configs/ast_g5_ncsi_defconfig b/configs/ast_g5_ncsi_defconfig
+new file mode 100644
+index 0000000000..74029ed514
+--- /dev/null
++++ b/configs/ast_g5_ncsi_defconfig
+@@ -0,0 +1,13 @@
++CONFIG_ARM=y
++CONFIG_TARGET_AST_G5=y
++CONFIG_SYS_PROMPT="ast# "
++CONFIG_CMD_BOOTEFI=n
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PING=y
++CONFIG_EFI_LOADER=n
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_OF_LIBFDT=y
++CONFIG_SPI_FLASH=y
++CONFIG_SYS_NS16550=y
+diff --git a/configs/ast_g5_phy_defconfig b/configs/ast_g5_phy_defconfig
+new file mode 100644
+index 0000000000..767f3af605
+--- /dev/null
++++ b/configs/ast_g5_phy_defconfig
+@@ -0,0 +1,14 @@
++CONFIG_ARM=y
++CONFIG_TARGET_AST_G5=y
++CONFIG_ASPEED_NET_PHY=y
++CONFIG_SYS_PROMPT="ast# "
++CONFIG_CMD_BOOTEFI=n
++CONFIG_CMD_DHCP=y
++CONFIG_CMD_PING=y
++CONFIG_EFI_LOADER=n
++CONFIG_FIT=y
++CONFIG_FIT_VERBOSE=y
++CONFIG_HUSH_PARSER=y
++CONFIG_OF_LIBFDT=y
++CONFIG_SPI_FLASH=y
++CONFIG_SYS_NS16550=y
