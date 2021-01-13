@@ -1,0 +1,49 @@
+From ffa4e9260d2e4dd8facfa6604cabf11b0f5a5e70 Mon Sep 17 00:00:00 2001
+From: Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>
+Date: Thu, 4 Feb 2021 08:24:39 -0300
+Subject: [PATCH] ast2600: Allow for SPL as large as 64Kb - 512b
+
+Recent changes[1] to the Aspeed U-boot allows for the SPL image to
+occupy the entire 64KB parity-checked SRAM.
+
+[1] - https://github.com/AspeedTech-BMC/u-boot/commit/a62cf9f2b4ee5526ab57f88077b056a36efcf2b8
+
+This patch increases the max BL1 image size to 64 * 1024 - 512 bytes
+(for the secureboot signature) to support those type of images.
+
+(Based on code originally from Andrew Jeffery)
+
+Signed-off-by: Andrew Jeffery <andrew@aj.id.au>
+Signed-off-by: Klaus Heinrich Kiwi <klaus@linux.vnet.ibm.com>
+---
+ socsec/socsec.py | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/socsec/socsec.py b/socsec/socsec.py
+index e784bab..608bad8 100755
+--- a/socsec/socsec.py
++++ b/socsec/socsec.py
+@@ -680,18 +680,19 @@ class Sec(object):
+                 header_offset = 0x20
+             if enc_offset == None:
+                 enc_offset = 0x50
+-            if bl1_image_len > (60 * 1024):
+-                raise SecError("The maximum size of BL1 image is 60 KBytes.")
++            bl1_max_len = 64 * 1024 - 512
+         elif soc_version == '1030':
+             if header_offset == None:
+                 header_offset = 0x400
+             if enc_offset == None:
+                 enc_offset = 0x430
+-            if bl1_image_len > (768 * 1024):
+-                raise SecError("The maximum size of BL1 image is 768 KBytes.")
++            bl1_max_len = 768 * 1024
+         else:
+             raise SecError("SOC version is not avaliable")
+ 
++        if bl1_image_len > bl1_max_len:
++            raise SecError(f"The maximum size of BL1 image is {bl1_max_len} bytes.")
++
+         if enc_offset % 16:
+             raise SecError("The enc_offset should be 16 bytes aligned")
+ 
