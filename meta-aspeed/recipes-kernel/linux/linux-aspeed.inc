@@ -8,7 +8,8 @@ KCONFIG_MODE="--alldefconfig"
 
 KSRC ?= "git://github.com/openbmc/linux;protocol=git;branch=${KBRANCH}"
 SRC_URI = "${KSRC}"
-SRC_URI += " file://defconfig"
+SRC_URI += " file://rsa_oem_fit_key.key;sha256sum=59d9571a2e11b1ddb1d02538d448d5bfb4d0da341ba6af7a45e38be3d0fa76b1 \
+             file://rsa_oem_fit_key.crt;sha256sum=0fa0d59579fa19bc344d215f81c2315d9e04e5058a9926f108799e58bd8cca34"
 
 LINUX_VERSION_EXTENSION ?= "-${SRCREV}"
 
