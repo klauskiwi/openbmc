@@ -1,14 +1,14 @@
 diff --git a/Makefile.am b/Makefile.am
-index 8fadc58..d624a1e 100644
+index cc873e7..8f11434 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -21,25 +21,18 @@ ATTRIB_XML = \
+@@ -21,25 +21,19 @@ ATTRIB_XML = \
  	$(EKB)/hwpf/fapi2/xml/attribute_info/system_attributes.xml \
  	$(EKB)/hwpf/fapi2/xml/attribute_info/unit_attributes.xml \
  \
 -	$(EKB)/chips/p10/procedures/xml/attribute_info/memory_spd_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_bars_attributes.xml \
--	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_chip_ec_attributes.xml \
+ 	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_chip_ec_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_clock_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_freq_attributes.xml \
  	$(EKB)/chips/p10/procedures/xml/attribute_info/p10_hcode_image_build_attributes.xml \
