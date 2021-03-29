@@ -14,7 +14,7 @@ inherit autotools \
         mrw-xml
 
 SRC_URI = "git://git@github.ibm.com/phal/pdata;protocol=ssh"
-SRCREV = "c2980471efadc5ea4ae3976826912da22a96e4d3"
+SRCREV = "aa9a22edcdb824c6ed4991fb3abb8b2892a68aee"
 
 DEPENDS = "pdbg \
            libxml-simple-perl-native \

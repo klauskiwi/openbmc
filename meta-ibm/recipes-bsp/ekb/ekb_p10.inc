@@ -1,6 +1,6 @@
 EKB_BRANCH = "master-p10"
 EKB_URI = "git://git@github.ibm.com/openbmc/pub-ekb;branch=${EKB_BRANCH};protocol=ssh"
-EKB_REV = "a991724ab7a3318cbf792e32518012a652664a66"
+EKB_REV = "820aec61c30756cd32bad7ecf40c9d92c129913d"
 
 REQ_ATTRS_XMLS = "chips/p10/procedures/xml/attribute_info/p10_clock_attributes.xml \
            chips/p10/procedures/xml/attribute_info/p10_freq_attributes.xml \
