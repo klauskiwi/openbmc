@@ -17,7 +17,7 @@ inherit autotools \
 
 SRCREV_FORMAT = "libekb_ekb"
 
-SRCREV_libekb = "84166891c96a8d8bffda7c43f1cf16403be98af9"
+SRCREV_libekb = "cf98955254b954b3243775fdbb4ae739d35b52de"
 SRCREV_ekb = "${EKB_REV}"
 
 SRC_URI = "git://git@github.ibm.com/phal/libekb_p10;name=libekb;protocol=ssh \
