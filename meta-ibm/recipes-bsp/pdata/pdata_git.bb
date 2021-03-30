@@ -13,7 +13,7 @@ inherit autotools \
         perlnative
 
 SRC_URI = "git://git@github.ibm.com/phal/pdata;protocol=ssh"
-SRCREV = "d06c6b7009d8b8af6b8ffff6a4bfdef152154e6f"
+SRCREV = "0a98cbbf454ff2ba5b3048a73fccbe3f9c66369e"
 
 DEPENDS = "pdbg \
            libxml-simple-perl-native \
