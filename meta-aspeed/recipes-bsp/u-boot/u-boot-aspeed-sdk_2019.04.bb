@@ -8,6 +8,8 @@ PROVIDES += "u-boot"
 DEPENDS += "bc-native dtc-native"
 
 SRC_URI_append_df-phosphor-mmc = " file://u-boot-env-ast2600.txt"
+SRC_URI += "${@oe.utils.conditional('SPL_SIGN_ENABLE', '1', 'file://uboot-spl-disable-raw.cfg', '', d)} \
+           "
 
 UBOOT_ENV_SIZE_df-phosphor-mmc = "0x10000"
 UBOOT_ENV_df-phosphor-mmc = "u-boot-env"
