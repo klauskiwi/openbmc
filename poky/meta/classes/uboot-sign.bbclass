@@ -473,6 +473,15 @@ do_deploy_prepend_pn-${UBOOT_PN}() {
 
 }
 
+do_deploy_append_pn-${UBOOT_PN}() {
+	# If we're creating a u-boot fitImage, point u-boot.bin
+	# symlink since it might get used by image recipes
+	if [ "${UBOOT_FITIMAGE_ENABLE}" = "1" ] ; then
+		ln -sf ${UBOOT_FITIMAGE_IMAGE} ${DEPLOYDIR}/${UBOOT_BINARY}
+		ln -sf ${UBOOT_FITIMAGE_IMAGE} ${DEPLOYDIR}/${UBOOT_SYMLINK}
+	fi
+}
+
 python () {
     if (   (d.getVar('UBOOT_SIGN_ENABLE') == '1'
             or d.getVar('UBOOT_FITIMAGE_ENABLE') == '1')
