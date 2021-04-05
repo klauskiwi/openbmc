@@ -4,9 +4,9 @@ SRC_URI = "https://rchweb.rchland.ibm.com/afs/rchland/projects/esw/${RELEASE}/Bu
 
 # Rainier
 RELEASE_rainier ?= "fw1020"
-VERSION_rainier ?= "1020.2112.20210325a"
+VERSION_rainier ?= "1020.2114.20210402a"
 TARBALL_NAME_rainier ?= "obmc-phosphor-image-rainier.ext4.mmc.tar;name=rainier"
-SRC_URI[rainier.sha256sum] = "e507293cf49396d00ca617461ef2974e5c09d3a3b578697fde226a726cef9faf"
+SRC_URI[rainier.sha256sum] = "708275a30811f57a558a08cab87123e2d3efe5c01ec538b195eba5301c8d6400"
 
 # Tacoma
 RELEASE_witherspoon-tacoma ?= "fw1009"
